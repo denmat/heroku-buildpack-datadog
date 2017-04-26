@@ -7,6 +7,10 @@ else
   exit 1
 fi
 
+if [[ $DATADOG_TAGS ]]; then
+  sed -i -e "s/^.*tags:.*$/tags: ${DATADOG_TAGS}/" /app/.apt/opt/datadog-agent/agent/datadog.conf
+fi
+
 if [[ $HEROKU_APP_NAME ]]; then
   sed -i -e "s/^.*hostname:.*$/hostname: ${HEROKU_APP_NAME}/" /app/.apt/opt/datadog-agent/agent/datadog.conf
 else
